@@ -8,7 +8,7 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
 from info import *
-from imdb import IMDb
+from imdb import Cinemagoer
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton
 from pyrogram import enums
@@ -29,7 +29,7 @@ BTN_URL_REGEX = re.compile(
     r"(\[([^\[]+?)\]\((buttonurl|buttonalert):(?:/{0,2})(.+?)(:same)?\))"
 )
 
-imdb = IMDb() 
+imdb = Cinemagoer() 
 
 BANNED = {}
 SMART_OPEN = '“'
@@ -62,6 +62,7 @@ async def is_subscribed(bot, query):
     return False
 
 async def get_poster(query, bulk=False, id=False, file=None):
+    imdb = Cinemagoer()
     if not id:
         # https://t.me/GetTGLink/4183
         query = (query.strip()).lower()
